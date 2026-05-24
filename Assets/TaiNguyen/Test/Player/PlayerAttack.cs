@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    // what thẻ hell
     // ồ nô hay ho thật đấy
     public float damage = 5;    //sát thương player tùy chỉnh
     public float radius;    // chiều rộng của vùng gây damage
@@ -45,6 +44,6 @@ public class PlayerAttack : MonoBehaviour
     void OnDrawGizmosSelected()     // một phương thức riêng để hiện hình ra
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chiều rộng
+        Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chf roj
     }
 }
