@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    // what thẻ hell
     public float damage = 5;    //sát thương player tùy chỉnh
     public float radius;    // chiều rộng của vùng gây damage
     public Transform attackPoint;   // điểm gây damage
