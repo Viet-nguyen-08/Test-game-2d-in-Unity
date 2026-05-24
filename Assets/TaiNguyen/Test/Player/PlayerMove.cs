@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    // hú hahaha
     public float move;
     public float jump;
     [SerializeField] private  Transform groundCheck;
