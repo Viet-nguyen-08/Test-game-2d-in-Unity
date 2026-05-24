@@ -20,7 +20,8 @@ public class PlayerMove : MonoBehaviour
         ani = GetComponent<Animator> ();
     }
     void Update()
-    {        
+    {      
+        Debug.Log("Hế loooooooooo");                        // thay đổi ở đây   
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * moveInput, rb.velocity.y);
         if(moveInput > 0) transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
