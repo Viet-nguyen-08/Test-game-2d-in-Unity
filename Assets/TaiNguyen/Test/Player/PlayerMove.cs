@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // hú hahaha
-    public float move;
-    public float jump;
+    public float move, jump, deltaTimeDam;
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded ;
+    private bool isGrounded;
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput;
-    private float deltaTime3;
-    public float deltaTimeDam;
+    private float moveInput, deltaTime3;
+    private int saveMove = 1;
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
@@ -41,10 +38,12 @@ public class PlayerMove : MonoBehaviour
             deltaTime3 -= Time.deltaTime;   // thuật toán đơn giản để khóa di chuyển
         } 
         if(Input.GetKeyDown(KeyCode.F)) deltaTime3 = deltaTimeDam;
-        if (Input.GetKeyDown(KeyCode.E))
+        if(moveInput > 0) saveMove = 1;
+        if(moveInput < 0) saveMove = -1;
+        if(Input.GetKeyDown(KeyCode.E))
         {
-           Debug.Log("button E is start !"); 
-           transform.position += new Vector3(4f, 0f, 0f);
+            transform.position += new Vector3(saveMove * 3f, 0f, 0f);   
+               
         }  
     }
     
