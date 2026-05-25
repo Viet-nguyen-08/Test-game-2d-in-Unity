@@ -1041,7 +1041,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  deltaTime4: 0.49
+  deltaTimeDam: 0.79
 --- !u!114 &1472207033
 MonoBehaviour:
   m_ObjectHideFlags: 0

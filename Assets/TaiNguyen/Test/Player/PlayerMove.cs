@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     private Animator ani;
     private float moveInput;
     private float deltaTime3;
-    public float deltaTime4;
+    public float deltaTimeDam;
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
@@ -22,7 +22,6 @@ public class PlayerMove : MonoBehaviour
     }
     void Update()
     {      
-        Debug.Log("Hế loooooooooo");                        // thay đổi ở đây   
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * moveInput, rb.velocity.y);
         if(moveInput > 0) transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
@@ -41,7 +40,12 @@ public class PlayerMove : MonoBehaviour
             move = 0;
             deltaTime3 -= Time.deltaTime;   // thuật toán đơn giản để khóa di chuyển
         } 
-        if(Input.GetKeyDown(KeyCode.F)) deltaTime3 = deltaTime4;     
+        if(Input.GetKeyDown(KeyCode.F)) deltaTime3 = deltaTimeDam;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+           Debug.Log("button E is start !"); 
+           transform.position += new Vector3(4f, 0f, 0f);
+        }  
     }
     
 }
