@@ -7,30 +7,35 @@ public class PlayerMove : MonoBehaviour
     public float move, jump, deltaTimeDam;
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded;
+    private bool isGrounded, isLerping;
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput, deltaTime3;
+    private float moveInput, deltaTime3, timer, moveTime = 1f;
     private int saveMove = 1;
+    private Vector3 startPos, targetPos;
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
         ani = GetComponent<Animator> ();
     }
     void Update()
-    {      
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(move * moveInput, rb.velocity.y);
-        if(moveInput > 0) transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        if(moveInput < 0) transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f);
-        bool run = Mathf.Abs(rb.velocity.x) > 0.1f;
-        ani.SetBool("isRuning", run);       
-        if (Input.GetButtonDown("Jump") && isGrounded)
+    {     
+        if(!isLerping)
+        {
+            moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(move * moveInput, rb.velocity.y);
+            if(moveInput > 0) transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            if(moveInput < 0) transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f);
+            bool run = Mathf.Abs(rb.velocity.x) > 0.1f;
+            ani.SetBool("isRuning", run);       
+            if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jump);
             Debug.Log("wtf bth mà");
         }
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer); 
+        } 
+        
         if(deltaTime3 <= 0) move = 5;
         else
         {
@@ -38,13 +43,21 @@ public class PlayerMove : MonoBehaviour
             deltaTime3 -= Time.deltaTime;   // thuật toán đơn giản để khóa di chuyển
         } 
         if(Input.GetKeyDown(KeyCode.F)) deltaTime3 = deltaTimeDam;
-        if(moveInput > 0) saveMove = 1;
-        if(moveInput < 0) saveMove = -1;
-        if(Input.GetKeyDown(KeyCode.E))
+        if (isLerping)
         {
-            transform.position += new Vector3(saveMove * 3f, 0f, 0f);   
-               
-        }  
+            timer += Time.deltaTime;
+            float f = timer / moveTime;
+            transform.position = Vector3.Lerp(startPos, targetPos, f);
+            if(f >= 1) isLerping = false;
+        }
+        if(Input.GetKeyDown(KeyCode.J)) StartLerp(new Vector3(5, 0, 0));
+    }
+    void StartLerp(Vector3 target)
+    {
+        isLerping = true;
+        startPos = transform.position;
+        targetPos = target;
+        timer = 0f;
     }
     
 }
