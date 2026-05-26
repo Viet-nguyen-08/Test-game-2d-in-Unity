@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded, isLerping;
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput, deltaTime3, timer;    private int saveMove = 1;
+    private float moveInput, deltaTime3, timer;
     private Vector3 startPos, targetPos;
     void Start()
     {

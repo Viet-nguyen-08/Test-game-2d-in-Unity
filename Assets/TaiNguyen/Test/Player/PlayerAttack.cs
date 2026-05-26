@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     // ồ nô hay ho thật đấy
-    public float damage = 5;    //sát thương player tùy chỉnh
+    public float PunchDamage = 5;    //sát thương player tùy chỉnh
     public float radius;    // chiều rộng của vùng gây damage
     public Transform attackPoint;   // điểm gây damage
     public LayerMask enemyLayer;    // lớp layer để tương tác
@@ -18,9 +18,9 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
-       attack();
+       PunchAttack();
     }
-    void attack()
+    void PunchAttack()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position , radius, enemyLayer);
             for(int i = 0; i < enemies.Length; i++)
             {
-                enemies[i].GetComponent<EnemyScript> ().TakeDamage(damage);
+                enemies[i].GetComponent<EnemyScript> ().TakeDamage(PunchDamage);
             }
     }
     void endAttack()

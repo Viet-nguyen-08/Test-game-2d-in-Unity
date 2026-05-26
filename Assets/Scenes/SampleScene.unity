@@ -1168,8 +1168,9 @@ MonoBehaviour:
   move: 5
   jump: 5.02
   deltaTimeDam: 0.79
-  dashDistance: 3
+  dashDistance: 17.46
   dashTime: 0.3
+  moveTime: 1
   groundCheck: {fileID: 118504542}
   groundLayer:
     serializedVersion: 2
@@ -1186,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f627f11ecd47d4b98abe7f6e796232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  PunchDamage: 5
   radius: 0.71
   attackPoint: {fileID: 1893985037}
   enemyLayer:
