@@ -1170,7 +1170,7 @@ MonoBehaviour:
   deltaTimeDam: 0.79
   dashDistance: 17.46
   dashTime: 0.3
-  moveTime: 1
+  moveTime: 0.26
   groundCheck: {fileID: 118504542}
   groundLayer:
     serializedVersion: 2
@@ -1188,6 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PunchDamage: 5
+  TeleDamage: 2
   radius: 0.71
   attackPoint: {fileID: 1893985037}
   enemyLayer:
