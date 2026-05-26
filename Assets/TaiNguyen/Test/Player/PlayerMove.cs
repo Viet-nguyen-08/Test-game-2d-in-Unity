@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float move, jump, deltaTimeDam, dashDistance = 3f, dashTime = 0.3f;
+    public float move, jump, deltaTimeDam, dashDistance = 3f, dashTime = 0.3f,  moveTime = 1f;
+
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded, isLerping;
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput, deltaTime3, timer, moveTime = 1f;
-    private int saveMove = 1;
+    private float moveInput, deltaTime3, timer;    private int saveMove = 1;
     private Vector3 startPos, targetPos;
     void Start()
     {
