@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float move, jump, deltaTimeDam;
+    public float move, jump, deltaTimeDam, dashDistance = 3f, dashTime = 0.3f;
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded, isLerping;
@@ -50,14 +50,15 @@ public class PlayerMove : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, targetPos, f);
             if(f >= 1) isLerping = false;
         }
-        if(Input.GetKeyDown(KeyCode.J)) StartLerp(new Vector3(5, 0, 0));
+        if(Input.GetKeyDown(KeyCode.J)) StartDash();
     }
-    void StartLerp(Vector3 target)
+    void StartDash()
     {
         isLerping = true;
-        startPos = transform.position;
-        targetPos = target;
         timer = 0f;
+        startPos = transform.position;
+        float dir = transform.localScale.x;
+        targetPos = startPos + new Vector3(dir * dashDistance, 0f, 0f);
     }
     
 }
