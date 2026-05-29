@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-   private int hehehe;
    public float health;
    public float move;
    private Animator anim;

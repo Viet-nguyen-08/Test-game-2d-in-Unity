@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     // ồ nô hay ho thật đấy
-    public float PunchDamage = 5, TeleDamage = 2;    //sát thương player tùy chỉnh
-    public float radius, radius2;     // chiều rộng của vùng gây damage
-    public Transform attackPoint, telePoint;    // điểm gây damage
-    public LayerMask enemyLayer;    // lớp layer để tương tác
+    public float PunchDamage = 5, TeleDamage = 2;       //sát thương player tùy chỉnh
+    public float radius;                                // chiều rộng của vùng gây damage
+    public Vector2 boxsize = new Vector2(2f, 1f);
+    public Transform attackPoint, telePoint;            // điểm gây damage
+    public LayerMask enemyLayer;                        // lớp layer để tương tác
     private Animator anim;
     private bool isAtt = false;
+    private float teleTime = 0f;
+    
     
     void Start()
     {
@@ -19,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
        PunchAttack();
-        TeleAttack();
+       
     }
     void PunchAttack()
     {
@@ -29,33 +32,30 @@ public class PlayerAttack : MonoBehaviour
                        
         }       
     }
-    void getAttackPounch()
+    void getAttackPounch()                                  // được gọi trong animation event
     {
-        // cú pháp ở đây là điểm gây dame +position, chiều rộng, lớp 
+                                                            // cú pháp ở đây là điểm gây dame +position, chiều rộng, lớp tương tác
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position , radius, enemyLayer);
             for(int i = 0; i < enemies.Length; i++)
             {
                 enemies[i].GetComponent<EnemyScript> ().TakeDamage(PunchDamage);
             }
     }
-    void endAttackPounch()
+    void endAttackPounch()                                  // được gọi trong animation event
     {
         anim.SetBool("isAtt", isAtt);
     }
-    void TeleAttack()
+   
+    public void getAtackTele()
     {
-        if(Input.GetKeyDown(KeyCode.J)) getAtackTele();
-    }
-    void getAtackTele()
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(telePoint.position, radius2, enemyLayer);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(telePoint.position, boxsize, 0f, enemyLayer);
         for(int i = 0; i < enemies.Length; i++) enemies[i].GetComponent<EnemyScript> ().TakeDamage(TeleDamage);
     }
-    void OnDrawGizmosSelected()     // một phương thức riêng để hiện hình ra
+    void OnDrawGizmosSelected()                             // một phương thức riêng để vẽ hình ra
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chf roj
+        Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chiều rộng
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(telePoint.position, radius2);
+        Gizmos.DrawWireCube(telePoint.position, boxsize);
     }
 }
