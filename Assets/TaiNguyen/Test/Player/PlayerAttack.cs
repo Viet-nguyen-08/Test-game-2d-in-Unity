@@ -9,33 +9,45 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackPoint;                       // điểm gây damage
     public LayerMask enemyLayer;                        // lớp layer để tương tác
     private Animator anim;
-    private bool isAtt = false;   
+    private bool isAtt;   
+    private float timer;
+    private int hit;
     void Start()
     {
         anim = GetComponent<Animator>();
     }
     void Update()
     {
-       PunchAttack();      
-    }
-    void PunchAttack()
-    {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            anim.SetBool("isAtt", !isAtt);                       
-        }       
+            anim.SetTrigger("isAttacking");
+            isAtt = true;
+            timer = 0f;
+            hit = 0;
+        }
+            if (isAtt)
+            {
+                timer += Time.deltaTime;
+                if(timer >= 0.3f)
+                {
+                    hit++;
+                    getAttackPounch();
+                    timer = 0f;
+                    if(hit >= 3)
+                    {
+                        isAtt = false;
+                    }
+                }
+            }
+             
     }
-    void getAttackPounch()                                      // được gọi trong animation event
+    void getAttackPounch()                                      
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position , radius, enemyLayer);// cú pháp ở đây là điểm gây dame +position, chiều rộng, lớp tương tác
             for(int i = 0; i < enemies.Length; i++)
             {
-                enemies[i].GetComponent<EnemyScript> ().TakeDamage(PunchDamage);
+                enemies[i].GetComponent<EnemyScript>().TakeDamage(PunchDamage);
             }
-    }
-    void endAttackPounch()                                  // được gọi trong animation event
-    {
-        anim.SetBool("isAtt", isAtt);
     }
     void OnDrawGizmosSelected()                             // một phương thức riêng để vẽ hình ra
     {

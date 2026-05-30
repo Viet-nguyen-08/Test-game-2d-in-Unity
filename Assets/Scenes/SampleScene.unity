@@ -1219,12 +1219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f627f11ecd47d4b98abe7f6e796232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PunchDamage: 5
-  TeleDamage: 2
+  PunchDamage: 2
   radius: 0.71
-  boxsize: {x: 0.7, y: 2.68}
   attackPoint: {fileID: 1893985037}
-  telePoint: {fileID: 1087851310}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

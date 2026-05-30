@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded, isLerping, isDashAttack;              
+    private bool isGrounded, isLerping, isDashAttack, isAttack;           
     private Rigidbody2D rb;
     private Animator ani;
     private float moveInput, deltaTime3, timer;      
@@ -42,7 +42,11 @@ public class PlayerMove : MonoBehaviour
             move = 0;
             deltaTime3 -= Time.deltaTime;   // thuật toán đơn giản để khóa di chuyển
         } 
-        if(Input.GetKeyDown(KeyCode.F)) deltaTime3 = deltaTimeDam;
+        if(Input.GetKeyDown(KeyCode.F))
+        {            
+            ani.SetTrigger("isAttacking");
+            deltaTime3 = deltaTimeDam;
+        }
         
         if (isLerping)
         {
