@@ -1200,9 +1200,9 @@ MonoBehaviour:
   move: 5
   jump: 5.02
   deltaTimeDam: 0.79
-  dashDistance: 17.46
+  dashDistance: 5
   dashTime: 0.3
-  moveTime: 1.01
+  moveTime: 0.11
   groundCheck: {fileID: 118504542}
   groundLayer:
     serializedVersion: 2

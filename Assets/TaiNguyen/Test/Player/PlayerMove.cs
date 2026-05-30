@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded, isLerping, isDashAttack;              
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput, deltaTime3, timer, teleTime;      
+    private float moveInput, deltaTime3, timer;      
     private Vector3 startPos, targetPos;
     void Start()
     {
@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(isDashAttack && collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyScript> ().TakeDamage(2);
+            collision.GetComponent<EnemyScript>(). TakeDamage(2);
         }
     }
     void StartDash()
