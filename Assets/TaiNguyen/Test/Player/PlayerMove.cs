@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float move, jump, deltaTimeDam, dashDistance = 3f, moveTime = 1f;
+    public float move, jump; 
+    public float deltaTimeDamF, deltaTimeDamH;                   // sát thương tùy chỉnh
+    public float dashDistance = 3f, moveTime = 1f;              // khoảng cách lướt và chia thời gian
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded, isLerping, isDashAttack, isAttack;           
+    private bool isGrounded, isLerping, isDashAttack;           
     private Rigidbody2D rb;
     private Animator ani;
     private float moveInput, deltaTime3, timer;      
-    private Vector3 startPos, targetPos;
+    private Vector3 startPos, targetPos;                        // nội suy
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
@@ -38,14 +40,8 @@ public class PlayerMove : MonoBehaviour
         else
         {
             move = 0;
-            deltaTime3 -= Time.deltaTime;   // thuật toán đơn giản để khóa di chuyển
-        } 
-        if(Input.GetKeyDown(KeyCode.F))
-        {            
-            ani.SetTrigger("isAttacking");
-            deltaTime3 = deltaTimeDam;
-        }
-        
+            deltaTime3 -= Time.deltaTime;                               // thuật toán đơn giản để khóa di chuyển
+        }              
         if (isLerping)
         {
             timer += Time.deltaTime;
@@ -57,7 +53,17 @@ public class PlayerMove : MonoBehaviour
                 isDashAttack = false;
             }            
         }
+        if(Input.GetKeyDown(KeyCode.F))
+        {            
+            ani.SetTrigger("isAttacking");
+            deltaTime3 = deltaTimeDamF;
+        }  
         if (Input.GetKeyDown(KeyCode.J)) StartDash();
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            ani.SetTrigger("isAttacking");
+            deltaTime3 = deltaTimeDamH;
+        }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
