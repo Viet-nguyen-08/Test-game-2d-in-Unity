@@ -6,13 +6,13 @@ public class PlayerMove : MonoBehaviour
 {
     public float move, jump; 
     public float deltaTimeDamF, deltaTimeDamH;                   // sát thương tùy chỉnh
-    public float dashDistance = 3f, moveTime = 1f;              // khoảng cách lướt và chia thời gian
+    public float dashDistance = 3f, moveTimeInterpo = 1f;              // khoảng cách lướt và chia thời gian
     [SerializeField] private  Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded, isLerping, isDashAttack;           
     private Rigidbody2D rb;
     private Animator ani;
-    private float moveInput, deltaTime3, timer;      
+    private float moveInput, deltaTime3, timerInterpo;      
     private Vector3 startPos, targetPos;                        // nội suy
     void Start()
     {
@@ -44,8 +44,8 @@ public class PlayerMove : MonoBehaviour
         }              
         if (isLerping)
         {
-            timer += Time.deltaTime;
-            float f = timer / moveTime;
+            timerInterpo += Time.deltaTime;
+            float f = timerInterpo / moveTimeInterpo;
             transform.position = Vector3.Lerp(startPos, targetPos, f);
             if(f >= 1)
             {
@@ -59,11 +59,11 @@ public class PlayerMove : MonoBehaviour
             deltaTime3 = deltaTimeDamF;
         }  
         if (Input.GetKeyDown(KeyCode.J)) StartDash();
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            ani.SetTrigger("isAttacking");
-            deltaTime3 = deltaTimeDamH;
-        }
+    }
+    public void flip()
+    {
+        if(moveInput > 0) transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        if(moveInput < 0) transform.localScale = new Vector3(-0.2f, 0.2f, 0.2f); 
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -76,7 +76,7 @@ public class PlayerMove : MonoBehaviour
     {
         isLerping = true;
         isDashAttack = true;
-        timer = 0f;
+        timerInterpo = 0f;
         startPos = transform.position;
         float dir = Mathf.Sign(transform.localScale.x);
         targetPos = startPos + new Vector3(dir * dashDistance, 0f, 0f);

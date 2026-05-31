@@ -13,7 +13,6 @@ public class PlayerAttack : MonoBehaviour
     private bool isAtt;   
     private float timer;
     private int hit;
-    public Vector2 boxsize = new Vector2(2f, 1f);
     
     public Transform attackBoxPoint;
 
@@ -23,11 +22,6 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            anim.SetTrigger("isAttacking");
-            getAttackPounchPr();
-        }
         if (Input.GetKeyDown(KeyCode.F))
         {
             anim.SetTrigger("isAttacking");
@@ -48,16 +42,7 @@ public class PlayerAttack : MonoBehaviour
                     isAtt = false;
                 }
             }
-        }
-                     
-    }
-    void getAttackPounchPr()
-    {
-        Collider2D[] enemies = Physics2D.OverlapBoxAll(attackBoxPoint.position, boxsize, 0f, enemyLayer);
-        for(int i = 0; i < enemies.Length; i++)
-        {
-            enemies[i].GetComponent<EnemyScript>().TakeDamage(PunchDamgePr);
-        }
+        }                     
     }
     void getAttackPounch()                                      
     {
@@ -71,7 +56,5 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chiều rộng
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackBoxPoint.position, boxsize);
     }
 }
