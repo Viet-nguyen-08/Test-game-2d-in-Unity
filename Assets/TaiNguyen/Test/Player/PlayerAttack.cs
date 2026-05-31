@@ -33,13 +33,12 @@ public class PlayerAttack : MonoBehaviour
                     hit++;
                     getAttackPounch();
                     timer = 0f;
-                    if(hit >= 3)
+                    if(hit >= 4)
                     {
                         isAtt = false;
                     }
                 }
-            }
-             
+            }             
     }
     void getAttackPounch()                                      
     {
@@ -49,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
                 enemies[i].GetComponent<EnemyScript>().TakeDamage(PunchDamage);
             }
     }
-    void OnDrawGizmosSelected()                             // một phương thức riêng để vẽ hình ra
+    void OnDrawGizmosSelected()                                 // một phương thức riêng để vẽ hình ra
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, radius);    // điểm + position, chiều rộng
