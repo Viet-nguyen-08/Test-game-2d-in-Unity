@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public float PunchDamage = 5;                       //sát thương player tùy chỉnh
-    public float PunchDamgePr = 7;
     public float radius;                                // chiều rộng của vùng gây damage
     public Transform attackPoint;                       // điểm gây damage
     public LayerMask enemyLayer;                        // lớp layer để tương tác

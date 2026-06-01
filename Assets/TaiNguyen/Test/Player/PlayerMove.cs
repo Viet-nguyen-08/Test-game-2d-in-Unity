@@ -59,6 +59,10 @@ public class PlayerMove : MonoBehaviour
             deltaTime3 = deltaTimeDamF;
         }  
         if (Input.GetKeyDown(KeyCode.J)) StartDash();
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            deltaTime3 = deltaTimeDamH;
+        }
     }
     public void flip()
     {
